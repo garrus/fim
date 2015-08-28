@@ -88,7 +88,7 @@ class Deal {
 	}
 
 
-	public static function predict($total, $cash, $stock){
+	public static function predict($principal, $cash, $stock){
 
 		if ($stock == 0) {
 			return null;
@@ -98,7 +98,7 @@ class Deal {
 		$levels = [20, 10, 5, 3, 2, 1, 0, -1, -2, -3, -5, -10];
 		$factor = ($stock * (1 - self::SELL_FEE_RATE));
 		foreach ($levels as $profitRate) {
-			$info[$profitRate] = ($total * (1 + 0.01 * $profitRate) - $cash) / $factor;
+			$info[$profitRate] = ($principal * (1 + 0.01 * $profitRate) - $cash) / $factor;
 		}
 
 		return array_filter($info, function($val){
