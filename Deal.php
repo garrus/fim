@@ -26,10 +26,11 @@ class Deal {
 	public function getFee(){
 
 		if ($this->type == 'buy') {
-			return $this->amount * self::BUY_FEE_RATE;
+			$fee = self::BUY_FEE_RATE * $this->amount / (1 + self::BUY_FEE_RATE);
 		} else {
-			return $this->stock * $this->price * self::SELL_FEE_RATE;
+			$fee = $this->stock * $this->price * self::SELL_FEE_RATE;
 		}
+		return $fee; // round($fee, 2);
 	}
 
 	/**
@@ -39,7 +40,7 @@ class Deal {
 		if ($this->type == 'buy') {
 			return -$this->amount;
 		} else {
-			return $this->stock * $this->price - $this->getFee();
+			return round($this->stock * $this->price - $this->getFee(), 2);
 		}
 	}
 
@@ -51,7 +52,7 @@ class Deal {
 
 		$cash += $this->getCashChange();
 		if ($this->type == 'buy') {
-			$stock += ($this->amount - $this->getFee()) / $this->price;
+			$stock += round(($this->amount - $this->getFee()) / $this->price, 2);
 		} else {
 			$stock -= $this->stock;
 		}

@@ -42,7 +42,7 @@ function display_deals($deals, &$cash, &$stock){
 	}
 
 	echo '------------------------------------------------------------------', PHP_EOL;
-	echo sprintf(' Principal: %.2f    Total Fee: %d (%.5f)', $principal, $totalFee, $totalFee / $principal), PHP_EOL;
+	echo sprintf(' Principal: %.2f    Total Fee: %.2f (%.5f)', $principal, $totalFee, $totalFee / $principal), PHP_EOL;
 	echo '------------------------------------------------------------------', PHP_EOL;
 
 }
