@@ -7,7 +7,7 @@ class Deal {
 
 	public $type;
 	public $amount;
-	public $stock;
+	public $share;
 	public $price;
 	public $date;
 
@@ -28,9 +28,9 @@ class Deal {
 		if ($this->type == 'buy') {
 			$fee = self::BUY_FEE_RATE * $this->amount / (1 + self::BUY_FEE_RATE);
 		} else {
-			$fee = $this->stock * $this->price * self::SELL_FEE_RATE;
+			$fee = $this->share * $this->price * self::SELL_FEE_RATE;
 		}
-		return $fee; // round($fee, 2);
+		return $fee;
 	}
 
 	/**
@@ -40,21 +40,21 @@ class Deal {
 		if ($this->type == 'buy') {
 			return -$this->amount;
 		} else {
-			return round($this->stock * $this->price - $this->getFee(), 2);
+			return $this->share * $this->price - $this->getFee();
 		}
 	}
 
 	/**
 	 * @param $cash
-	 * @param $stock
+	 * @param $share
 	 */
-	public function run(&$cash, &$stock){
+	public function run(&$cash, &$share){
 
 		$cash += $this->getCashChange();
 		if ($this->type == 'buy') {
-			$stock += round(($this->amount - $this->getFee()) / $this->price, 2);
+			$share += ($this->amount - $this->getFee()) / $this->price;
 		} else {
-			$stock -= $this->stock;
+			$share -= $this->share;
 		}
 	}
 
@@ -89,17 +89,18 @@ class Deal {
 	}
 
 
-	public static function predict($principal, $cash, $stock){
+	public static function predict($principal, $cash, $share){
 
-		if ($stock == 0) {
+		if ($share == 0) {
 			return null;
 		}
 
 		$info = [];
-		$levels = [20, 10, 5, 3, 2, 1, 0, -1, -2, -3, -5, -10];
-		$factor = ($stock * (1 - self::SELL_FEE_RATE));
+		$levels = [10, 5, 3, 2, 1, 0, -1, -2, -3, -5, -10];
+		$factor = ($share * (1 - self::SELL_FEE_RATE));
 		foreach ($levels as $profitRate) {
-			$info[$profitRate] = ($principal * (1 + 0.01 * $profitRate) - $cash) / $factor;
+			$info[$profitRate][0] = ($principal - $cash) * (1 + 0.01 * $profitRate) / $factor;
+			$info[$profitRate][1] = ($principal * (1 + 0.01 * $profitRate) - $cash) / $factor;
 		}
 
 		return array_filter($info, function($val){
@@ -148,16 +149,16 @@ class DealBuilder{
 	}
 
 	/**
-	 * @param $stock
+	 * @param $share
 	 *
 	 * @return $this|Deal|DealBuilder
 	 */
-	public function sell($stock){
+	public function sell($share){
 		if ($this->deal->type) {
 			throw new BadMethodCallException;
 		}
 		$this->deal->type = 'sell';
-		$this->deal->stock = $stock;
+		$this->deal->share = $share;
 		return $this->prepare();
 	}
 
@@ -180,7 +181,7 @@ class DealBuilder{
 	 */
 	private function prepare(){
 		$deal = $this->deal;
-		if ($deal->price && $deal->date && $deal->type && ($deal->amount || $deal->stock)) {
+		if ($deal->price && $deal->date && $deal->type && ($deal->amount || $deal->share)) {
 			return $deal;
 		} else {
 			return $this;

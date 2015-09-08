@@ -55,7 +55,7 @@ function display_predict($principal, $cash, $stock){
 	}
 
 	foreach ($info as $level => $price) {
-		printf('  %3s%% -- %1.4f'. PHP_EOL, sprintf('%+2d', $level), $price);
+		printf('  %3s%% -- %1.4f -- %1.4f'. PHP_EOL, sprintf('%+2d', $level), $price[0], $price[1]);
 	}
 
 }
