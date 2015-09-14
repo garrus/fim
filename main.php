@@ -18,8 +18,8 @@ display_predict($principal, $cash, $stock);
 function display_deals($deals, &$cash, &$stock){
 
 	echo '------------------------------------------------------------------', PHP_EOL;
-	printf('  %4s | %5s|%9s|  %5s |  %4s  |  %3s | %6s | %4s'. PHP_EOL,
-		'Date', 'Price', 'Cash chg.', 'Stock', 'Cash', 'Fee', 'Profit', 'Avg.');
+	printf('  %4s | %5s|%6s|%9s|  %5s |  %4s  |  %3s | %6s | %4s'. PHP_EOL,
+		'Date', 'Price', '~Price', 'Cash chg.', 'Stock', 'Cash', 'Fee', 'Profit', 'Avg.');
 	echo '------------------------------------------------------------------', PHP_EOL;
 
 	$principal = $cash;
@@ -28,9 +28,10 @@ function display_deals($deals, &$cash, &$stock){
 		$deal->run($cash, $stock);
 		$totalFee += $deal->getFee();
 		$profit = ($cash + $stock * $deal->price) - $principal;
-		printf(' %5s |%6s|%9s|%8s|%8s|%6s|%8s|%6s'. PHP_EOL,
+		printf(' %5s |%6s|%6s|%9s|%8s|%8s|%6s|%8s|%6s'. PHP_EOL,
 			substr($deal->date, 3),
 			sprintf('%1.4f', $deal->price),
+			sprintf('%1.4f', $deal->getActualPrice()),
 			sprintf('%+5.2f', $deal->getCashChange()),
 			sprintf('%5.2f', $stock),
 			sprintf('%5.2f', $cash),

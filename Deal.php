@@ -34,13 +34,25 @@ class Deal {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getCashChange(){
 		if ($this->type == 'buy') {
 			return -$this->amount;
 		} else {
 			return $this->share * $this->price - $this->getFee();
+		}
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getActualPrice(){
+
+		if ($this->type == 'buy') {
+			return (1 + self::BUY_FEE_RATE) * $this->price;
+		} else {
+			return (1 - self::SELL_FEE_RATE) * $this->price;
 		}
 	}
 
