@@ -181,7 +181,7 @@ class DealBuilder{
 	 */
 	private function prepare(){
 		$deal = $this->deal;
-		if ($deal->price && $deal->date && $deal->type && ($deal->amount || $deal->share)) {
+		if ($deal->price && $deal->date && $deal->type && ($deal->amount !== null || $deal->share !== null)) {
 			return $deal;
 		} else {
 			return $this;

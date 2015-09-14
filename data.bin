@@ -5,5 +5,8 @@ O:4:"Deal":5:{s:4:"type";s:4:"sell";s:6:"amount";N;s:5:"share";d:8109;s:5:"price
 O:4:"Deal":5:{s:4:"type";s:3:"buy";s:6:"amount";d:9000;s:5:"share";N;s:5:"price";d:1.2197;s:4:"date";s:8:"15-08-18";}
 O:4:"Deal":5:{s:4:"type";s:3:"buy";s:6:"amount";d:1000;s:5:"share";N;s:5:"price";d:1.2197;s:4:"date";s:8:"15-08-18";}
 O:4:"Deal":5:{s:4:"type";s:3:"buy";s:6:"amount";d:10008.799999999999;s:5:"share";N;s:5:"price";d:1.1475;s:4:"date";s:8:"15-08-21";}
+O:4:"Deal":5:{s:4:"type";s:4:"sell";s:6:"amount";N;s:5:"share";i:0;s:5:"price";d:0.97750000000000004;s:4:"date";s:8:"15-08-26";}
 O:4:"Deal":5:{s:4:"type";s:4:"sell";s:6:"amount";N;s:5:"share";d:5028.4799999999996;s:5:"price";d:1.0797000000000001;s:4:"date";s:8:"15-08-31";}
 O:4:"Deal":5:{s:4:"type";s:3:"buy";s:6:"amount";d:7000;s:5:"share";N;s:5:"price";d:1.0463;s:4:"date";s:8:"15-09-07";}
+O:4:"Deal":5:{s:4:"type";s:4:"sell";s:6:"amount";N;s:5:"share";d:8650.3400000000001;s:5:"price";d:1.0929;s:4:"date";s:8:"15-09-09";}
+O:4:"Deal":5:{s:4:"type";s:3:"buy";s:6:"amount";d:2808.79;s:5:"share";N;s:5:"price";d:1.0772999999999999;s:4:"date";s:8:"15-09-11";}

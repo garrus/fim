@@ -10,6 +10,8 @@ Deal::build()->on('15-08-10')->sell(8109.00)->at(1.2981)->save();
 Deal::build()->on('15-08-18')->buy(9000.00)->at(1.2197)->save();
 Deal::build()->on('15-08-18')->buy(1000.00)->at(1.2197)->save();
 Deal::build()->on('15-08-21')->buy(10008.80)->at(1.1475)->save();
+Deal::build()->on('15-08-26')->sell(0)->at(0.9775)->save();
 Deal::build()->on('15-08-31')->sell(5028.48)->at(1.0797)->save();
 Deal::build()->on('15-09-07')->buy(7000.00)->at(1.0463)->save();
-
+Deal::build()->on('15-09-09')->sell(8650.34)->at(1.0929)->save();
+Deal::build()->on('15-09-11')->buy(2808.79)->at(1.0773)->save();
